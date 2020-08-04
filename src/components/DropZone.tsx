@@ -1,9 +1,9 @@
-import React, { useCallback } from 'react';
-import { useDropzone } from 'react-dropzone';
+import React, { useCallback } from 'react'
+import { useDropzone } from 'react-dropzone'
 
 
 function MyDropzone(props: {
-    setImage: React.Dispatch<React.SetStateAction<string | ArrayBuffer | null>>
+    setImage: React.Dispatch<React.SetStateAction<ArrayBuffer | undefined>>
 }) {
     const functionChanger = props.setImage;
     const onDrop = useCallback((acceptedFiles) => {
@@ -15,7 +15,10 @@ function MyDropzone(props: {
             reader.onload = () => {
                 // Do whatever you want with the file contents
                 const binaryStr = reader.result
-                functionChanger(binaryStr);
+                if (binaryStr instanceof ArrayBuffer)
+                    functionChanger(binaryStr)
+                else
+                    console.log(binaryStr)
             }
             reader.readAsArrayBuffer(file)
         })
