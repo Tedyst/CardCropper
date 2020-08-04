@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 import JSZip from 'jszip'
 import FileSaver from 'file-saver'
 
@@ -7,8 +7,13 @@ export default function Saver(props: {
 }) {
     const [generated, setGenerated] = React.useState<Blob>();
     let zip = new JSZip();
+    function handleClick(e: MouseEvent) {
+        e.preventDefault();
+        if (generated)
+            FileSaver.saveAs(generated, "export.zip");
+    }
     if (generated)
-        return <b>"Generated"</b>;
+        return <a href="#" onClick={handleClick}>Download zip</a>;
     if (props.images) {
         props.images.forEach((value: string, index: number) => {
             console.log(index, value)
@@ -19,7 +24,6 @@ export default function Saver(props: {
         zip.generateAsync({ type: "blob" })
             .then(function (content) {
                 setGenerated(content);
-                FileSaver.saveAs(content, "export.zip")
             });
     }
     return <b></b>;
