@@ -22,12 +22,7 @@
       "types",
       "./node_modules/@types"
     ],
-    "baseUrl": "./",
-    "paths": {
-      "*": [
-        "types/*"
-      ]
-    }
+    "baseUrl": "./"
   },
   "include": [
     "src",

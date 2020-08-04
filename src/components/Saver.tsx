@@ -16,7 +16,6 @@ export default function Saver(props: {
         return <a href="#" onClick={handleClick}>Download zip</a>;
     if (props.images) {
         props.images.forEach((value: string, index: number) => {
-            console.log(index, value)
             var idx = value.indexOf('base64,') + 'base64,'.length
             var content = value.substring(idx);
             zip.file(index + ".png", content, { base64: true });

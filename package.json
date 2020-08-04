@@ -10,7 +10,6 @@
     "base64-arraybuffer": "^0.2.0",
     "browser-image-manipulation": "^0.3.3",
     "file-saver": "^2.0.2",
-    "image-size": "^0.8.3",
     "jszip": "^3.5.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
