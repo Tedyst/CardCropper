@@ -10,7 +10,6 @@ export default function Card(props: {
 }) {
     const [formatted, setFormatted] = React.useState<string>("");
     let renderImage = <b>Loading</b>
-    console.log(props);
     if (props.image !== undefined && formatted === "") {
         new BrowserImageManipulation()
             .loadBlob(props.image)
