@@ -12,7 +12,7 @@ function App() {
     x: 100,
     y: 100,
     // Please don't ever go over 100, too much ram needed
-    number: 100,
+    number: 3,
   })
 
   let cropper = null;
@@ -28,6 +28,7 @@ function App() {
       <Settings
         settings={settings}
         setSettings={setSettings}
+        setResult={setResult}
       />
       <DropZone
         setImage={setImage}

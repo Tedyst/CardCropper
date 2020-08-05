@@ -23,7 +23,7 @@ export default function Cropper(props: {
             crop(blob, image_stats, props.setResult, props.settings);
             console.log("started cropping");
         }
-    })
+    }, [props])
     return <b>Not ready</b>
 }
 
