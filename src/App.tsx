@@ -32,7 +32,6 @@ function App() {
       generating={generating}
     />
   }
-  // console.log(image, image_stats)
 
   return (
     <div>
