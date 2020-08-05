@@ -16,13 +16,13 @@ export default function Settings(props: {
 }) {
     function handleClick(e: MouseEvent) {
         props.setSettings({
-            number: 12,
-            x: 722,
-            y: 1320
+            number: 100,
+            x: 100,
+            y: 100
         })
         props.setResult([]);
     }
     if (props.generating)
         return <b>cannot change settings</b>
-    return <a href="/#" onClick={handleClick}>Change Settings</a>;
+    return <a href="/#" onClick={handleClick}>VERY BAD Settings</a>;
 }
