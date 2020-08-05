@@ -17,6 +17,7 @@ function MyDropzone(props: {
                 const binaryStr = reader.result
                 if (binaryStr instanceof ArrayBuffer) {
                     props.setImage(binaryStr)
+                    props.setResult([]);
                 }
                 else
                     console.log(binaryStr)

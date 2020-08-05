@@ -31,7 +31,7 @@ export default function Cropper(props: {
             console.log("started cropping");
         }
     }, [props])
-    return <b>Not ready</b>
+    return <b></b>
 }
 
 async function crop(
