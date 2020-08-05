@@ -3,7 +3,7 @@ import JSZip from 'jszip'
 import FileSaver from 'file-saver'
 
 export default function Saver(props: {
-    images: string[] | undefined
+    images: string[]
 }) {
     const [generated, setGenerated] = React.useState<Blob>();
     let zip = new JSZip();
@@ -14,7 +14,7 @@ export default function Saver(props: {
     }
     if (generated)
         return <a href="#" onClick={handleClick}>Download zip</a>;
-    if (props.images) {
+    if (props.images.length !== 0) {
         props.images.forEach((value: string, index: number) => {
             var idx = value.indexOf('base64,') + 'base64,'.length
             var content = value.substring(idx);
