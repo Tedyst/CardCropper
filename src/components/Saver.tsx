@@ -21,6 +21,6 @@ export default function Saver(props: {
     }
 
     if (props.images.length !== 0)
-        return <a href="#" onClick={handleClick}>Download zip</a>;
+        return <a href="/#" onClick={handleClick}>Download zip</a>;
     return <b></b>;
 }

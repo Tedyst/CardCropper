@@ -3,6 +3,7 @@ import DropZone from './components/DropZone'
 import Saver from './components/Saver'
 import Cropper from './components/Cropper'
 import ResultBox from './components/ResultBox'
+import Settings from './components/Settings'
 
 function App() {
   const [image, setImage] = React.useState<ArrayBuffer>();
@@ -24,6 +25,10 @@ function App() {
 
   return (
     <div>
+      <Settings
+        settings={settings}
+        setSettings={setSettings}
+      />
       <DropZone
         setImage={setImage}
         setResult={setResult}
