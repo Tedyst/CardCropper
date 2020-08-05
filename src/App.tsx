@@ -17,7 +17,6 @@ function App() {
   const [settings, setSettings] = React.useState({
     x: 100,
     y: 100,
-    // Please don't ever go over 100, too much ram needed
     number: 1000,
   })
 
