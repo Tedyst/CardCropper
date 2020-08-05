@@ -20,7 +20,6 @@ export default function Settings(props: {
             x: 722,
             y: 1320
         })
-        props.setResult([]);
     }
     if (props.generating)
         return <b>cannot change settings</b>
