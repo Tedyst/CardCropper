@@ -4,9 +4,14 @@ import Saver from './components/Saver'
 import Cropper from './components/Cropper'
 import ResultBox from './components/ResultBox'
 import Settings from './components/Settings'
+import BrowserImageManipulation from 'browser-image-manipulation'
 
 function App() {
-  const [image, setImage] = React.useState<ArrayBuffer>();
+  const [image, setImage] = React.useState<BrowserImageManipulation>();
+  const [image_stats, setImageStats] = React.useState({
+    x: 0,
+    y: 0
+  })
   const [result, setResult] = React.useState<string[]>([]);
   const [generating, setGenerating] = React.useState(false);
   const [settings, setSettings] = React.useState({
@@ -17,16 +22,17 @@ function App() {
   })
 
   let cropper = null;
-  if (result.length === 0 && image instanceof ArrayBuffer && !generating) {
+  if (result.length === 0 && image instanceof BrowserImageManipulation && !generating) {
     cropper = <Cropper
       image={image}
+      image_stats={image_stats}
       settings={settings}
       setResult={setResult}
       setGenerating={setGenerating}
       generating={generating}
     />
   }
-
+  // console.log(image, image_stats)
 
   return (
     <div>
@@ -39,6 +45,7 @@ function App() {
       <DropZone
         setImage={setImage}
         setResult={setResult}
+        setImageStats={setImageStats}
       />
       {cropper}
       <br />
