@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react'
 import BrowserImageManipulation from 'browser-image-manipulation'
-import Base64 from 'base64-arraybuffer';
 
 export default function Cropper(props: {
-    image: ArrayBuffer;
+    image: BrowserImageManipulation;
     setResult: React.Dispatch<React.SetStateAction<string[]>>;
     settings: {
         x: number;
@@ -11,7 +10,11 @@ export default function Cropper(props: {
         number: number;
     },
     setGenerating: React.Dispatch<React.SetStateAction<boolean>>,
-    generating: boolean
+    generating: boolean,
+    image_stats: {
+        x: number;
+        y: number;
+    }
 }) {
     useEffect(() => {
         if (props.generating) {
@@ -19,24 +22,18 @@ export default function Cropper(props: {
             return;
         }
         props.setGenerating(true);
-        // Convert image to blob
-        let byteArray = new Uint8Array(props.image);
-        let blob = new Blob([byteArray], { type: 'image/png' });
+        crop(props.image, props.image_stats, props.setResult, props.settings, props.setGenerating)
 
-        let image_stats = new Image();
-        image_stats.src = "data:image/png;base64, " + Base64.encode(props.image);
-
-        image_stats.onload = function () {
-            crop(blob, image_stats, props.setResult, props.settings, props.setGenerating);
-            console.log("started cropping");
-        }
     }, [props])
     return <b></b>
 }
 
 async function crop(
-    blob: Blob,
-    image_stats: HTMLImageElement,
+    image: BrowserImageManipulation,
+    image_stats: {
+        x: number;
+        y: number;
+    },
     setResult: React.Dispatch<React.SetStateAction<string[]>>,
     settings: {
         x: number;
@@ -48,13 +45,12 @@ async function crop(
     // Start all promises
     let nr = 0;
     setGenerating(true);
-    let loaded_image = new BrowserImageManipulation().loadBlob(blob);
-    for (let j = 0; j <= image_stats.height - settings.y; j += settings.y)
-        for (let i = 0; i <= image_stats.width - settings.x; i += settings.x) {
+    for (let j = 0; j <= image_stats.y - settings.y; j += settings.y)
+        for (let i = 0; i <= image_stats.x - settings.x; i += settings.x) {
             nr++;
             if (nr > settings.number)
                 break;
-            await loaded_image.crop(settings.x, settings.y, 0.0001 + i, 0.0001 + j).saveAsImage().then(function (base64) {
+            await image.crop(settings.x, settings.y, 0.0001 + i, 0.0001 + j).saveAsImage().then(function (base64) {
                 setResult((prevState) => [...prevState, base64]);
             }).catch(function (e) { alert(e.toString()) });
         }
