@@ -8,11 +8,12 @@ import Settings from './components/Settings'
 function App() {
   const [image, setImage] = React.useState<ArrayBuffer>();
   const [result, setResult] = React.useState<string[]>([]);
+  const [generating, setGenerating] = React.useState(false);
   const [settings, setSettings] = React.useState({
-    x: 100,
-    y: 100,
+    x: 413,
+    y: 753,
     // Please don't ever go over 100, too much ram needed
-    number: 3,
+    number: 100,
   })
 
   let cropper = null;
@@ -21,25 +22,30 @@ function App() {
       image={image}
       settings={settings}
       setResult={setResult}
+      setGenerating={setGenerating}
     />
 
+  let gentext = generating ? "Generating" : "Not generating"
   return (
     <div>
       <Settings
         settings={settings}
         setSettings={setSettings}
         setResult={setResult}
+        generating={generating}
       />
       <DropZone
         setImage={setImage}
         setResult={setResult}
       />
       {cropper}
+      {gentext}
       <br />
       <ResultBox settings={settings} images={result} />
       <br />
       <Saver
-        images={result} />
+        images={result}
+      />
     </div>
   );
 }

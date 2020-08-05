@@ -11,15 +11,18 @@ export default function Settings(props: {
         y: number;
         number: number;
     }>>,
-    setResult: React.Dispatch<React.SetStateAction<string[]>>
+    setResult: React.Dispatch<React.SetStateAction<string[]>>,
+    generating: boolean
 }) {
     function handleClick(e: MouseEvent) {
         props.setSettings({
-            number: 5,
-            x: 300,
-            y: 300
+            number: 12,
+            x: 722,
+            y: 1320
         })
         props.setResult([]);
     }
+    if (props.generating)
+        return <b>cannot change settings</b>
     return <a href="/#" onClick={handleClick}>Change Settings</a>;
 }
