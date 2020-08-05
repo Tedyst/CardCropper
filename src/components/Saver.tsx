@@ -5,16 +5,10 @@ import FileSaver from 'file-saver'
 export default function Saver(props: {
     images: string[]
 }) {
-    const [generated, setGenerated] = React.useState<Blob>();
     let zip = new JSZip();
+
     function handleClick(e: MouseEvent) {
         e.preventDefault();
-        if (generated)
-            FileSaver.saveAs(generated, "export.zip");
-    }
-    if (generated)
-        return <a href="#" onClick={handleClick}>Download zip</a>;
-    if (props.images.length !== 0) {
         props.images.forEach((value: string, index: number) => {
             var idx = value.indexOf('base64,') + 'base64,'.length
             var content = value.substring(idx);
@@ -22,8 +16,11 @@ export default function Saver(props: {
         });
         zip.generateAsync({ type: "blob" })
             .then(function (content) {
-                setGenerated(content);
+                FileSaver.saveAs(content, "export.zip");
             });
     }
+
+    if (props.images.length !== 0)
+        return <a href="#" onClick={handleClick}>Download zip</a>;
     return <b></b>;
 }
