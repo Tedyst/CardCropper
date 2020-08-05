@@ -4,7 +4,6 @@ import Saver from './components/Saver'
 import Cropper from './components/Cropper'
 import ResultBox from './components/ResultBox'
 import Settings from './components/Settings'
-import Reload from './components/Reload'
 
 function App() {
   const [image, setImage] = React.useState<ArrayBuffer>();
@@ -43,7 +42,6 @@ function App() {
       />
       {cropper}
       <br />
-      <Reload setResult={setResult} generating={generating} />
       <br />
       <ResultBox settings={settings} images={result} />
       <br />
