@@ -6,7 +6,6 @@ function MyDropzone(props: {
     setImage: React.Dispatch<React.SetStateAction<ArrayBuffer | undefined>>,
     setResult: React.Dispatch<React.SetStateAction<string[]>>
 }) {
-    const functionChanger = props.setImage;
     const onDrop = useCallback((acceptedFiles) => {
         acceptedFiles.forEach((file: File) => {
             const reader = new FileReader()
@@ -17,8 +16,7 @@ function MyDropzone(props: {
                 // Do whatever you want with the file contents
                 const binaryStr = reader.result
                 if (binaryStr instanceof ArrayBuffer) {
-                    props.setResult([]);
-                    functionChanger(binaryStr)
+                    props.setImage(binaryStr)
                 }
                 else
                     console.log(binaryStr)
@@ -26,7 +24,7 @@ function MyDropzone(props: {
             reader.readAsArrayBuffer(file)
         })
 
-    }, [functionChanger, props])
+    }, [props])
     const { getRootProps, getInputProps } = useDropzone({ onDrop })
 
     return (

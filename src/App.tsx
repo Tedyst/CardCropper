@@ -4,6 +4,7 @@ import Saver from './components/Saver'
 import Cropper from './components/Cropper'
 import ResultBox from './components/ResultBox'
 import Settings from './components/Settings'
+import Reload from './components/Reload'
 
 function App() {
   const [image, setImage] = React.useState<ArrayBuffer>();
@@ -17,15 +18,17 @@ function App() {
   })
 
   let cropper = null;
-  if (result.length === 0 && image instanceof ArrayBuffer)
+  if (result.length === 0 && image instanceof ArrayBuffer && !generating) {
     cropper = <Cropper
       image={image}
       settings={settings}
       setResult={setResult}
       setGenerating={setGenerating}
+      generating={generating}
     />
+  }
 
-  let gentext = generating ? "Generating" : "Not generating"
+
   return (
     <div>
       <Settings
@@ -39,7 +42,8 @@ function App() {
         setResult={setResult}
       />
       {cropper}
-      {gentext}
+      <br />
+      <Reload setResult={setResult} generating={generating} />
       <br />
       <ResultBox settings={settings} images={result} />
       <br />

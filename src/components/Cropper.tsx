@@ -10,9 +10,15 @@ export default function Cropper(props: {
         y: number;
         number: number;
     },
-    setGenerating: React.Dispatch<React.SetStateAction<boolean>>
+    setGenerating: React.Dispatch<React.SetStateAction<boolean>>,
+    generating: boolean
 }) {
     useEffect(() => {
+        if (props.generating) {
+            console.log("collision detected");
+            return;
+        }
+        props.setGenerating(true);
         // Convert image to blob
         let byteArray = new Uint8Array(props.image);
         let blob = new Blob([byteArray], { type: 'image/png' });
