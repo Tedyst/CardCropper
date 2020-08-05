@@ -4,7 +4,6 @@ import Card from './components/Card';
 import BrowserImageManipulation from 'browser-image-manipulation'
 import Saver from './components/Saver';
 import Base64 from 'base64-arraybuffer';
-import BottleNeck from 'bottleneck';
 
 function App() {
   const [image, setImage] = React.useState<ArrayBuffer>();
@@ -12,13 +11,14 @@ function App() {
   const [settings, setSettings] = React.useState({
     x: 100,
     y: 100,
-    number: 10,
+    // Please don't ever go over 100, too much ram needed
+    number: 100,
   })
 
   let arr: JSX.Element[] = [];
   if (result.length !== 0) {
     for (let val in result) {
-      arr.push(<Card image={result[val]} key={"card" + val} />)
+      arr.push(<Card image={result[val]} key={"card" + val} size={Math.min(settings.x, settings.y) / 3} />)
     }
   }
   else {
@@ -34,6 +34,7 @@ function App() {
     <div>
       <DropZone
         setImage={setImage}
+        setResult={setResult}
       />
       <br />
       {arr}
@@ -66,7 +67,7 @@ function Cropper(props: {
       console.log("started cropping");
     }
   })
-  return <b></b>
+  return <b>Not ready</b>
 }
 
 async function crop(
@@ -85,7 +86,7 @@ async function crop(
       nr++;
       if (nr > settings.number)
         break;
-      new BrowserImageManipulation()
+      await new BrowserImageManipulation()
         .loadBlob(blob)
         .crop(settings.x, settings.y, 0.0001 + i, 0.0001 + j).saveAsImage().then(function (base64) {
           setResult((prevState) => [...prevState, base64]);
