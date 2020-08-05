@@ -9,7 +9,8 @@ export default function Cropper(props: {
         x: number;
         y: number;
         number: number;
-    };
+    },
+    setGenerating: React.Dispatch<React.SetStateAction<boolean>>
 }) {
     useEffect(() => {
         // Convert image to blob
@@ -20,7 +21,7 @@ export default function Cropper(props: {
         image_stats.src = "data:image/png;base64, " + Base64.encode(props.image);
 
         image_stats.onload = function () {
-            crop(blob, image_stats, props.setResult, props.settings);
+            crop(blob, image_stats, props.setResult, props.settings, props.setGenerating);
             console.log("started cropping");
         }
     }, [props])
@@ -35,9 +36,12 @@ async function crop(
         x: number;
         y: number;
         number: number;
-    }) {
+    },
+    setGenerating: React.Dispatch<React.SetStateAction<boolean>>
+) {
     // Start all promises
     let nr = 0;
+    setGenerating(true);
     for (let j = 0; j <= image_stats.height - settings.y; j += settings.y)
         for (let i = 0; i <= image_stats.width - settings.x; i += settings.x) {
             nr++;
@@ -49,4 +53,5 @@ async function crop(
                     setResult((prevState) => [...prevState, base64]);
                 }).catch(function (e) { alert(e.toString()) });
         }
+    setGenerating(false);
 }
