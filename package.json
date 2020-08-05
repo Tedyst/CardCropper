@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "@types/file-saver": "^2.0.1",
     "base64-arraybuffer": "^0.2.0",
+    "bottleneck": "^2.19.5",
     "browser-image-manipulation": "^0.3.3",
     "file-saver": "^2.0.2",
     "jszip": "^3.5.0",

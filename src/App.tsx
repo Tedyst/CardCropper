@@ -1,51 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import DropZone from './components/DropZone'
 import Card from './components/Card';
 import BrowserImageManipulation from 'browser-image-manipulation'
 import Saver from './components/Saver';
 import Base64 from 'base64-arraybuffer';
+import BottleNeck from 'bottleneck';
 
 function App() {
   const [image, setImage] = React.useState<ArrayBuffer>();
-  const [result, setResult] = React.useState<string[]>();
-  const [Updating, setUpdating] = React.useState(false);
+  const [result, setResult] = React.useState<string[]>([]);
   const [settings, setSettings] = React.useState({
     x: 100,
     y: 100,
-    number: 70,
+    number: 10,
   })
 
   let arr: JSX.Element[] = [];
-  if (result) {
+  if (result.length !== 0) {
     for (let val in result) {
       arr.push(<Card image={result[val]} key={"card" + val} />)
     }
   }
   else {
-    if (image instanceof ArrayBuffer && Updating === false) {
-      setUpdating(true);
-      // Convert image to blob
-      let byteArray = new Uint8Array(image);
-      let blob = new Blob([byteArray], { type: 'image/png' });
-
-      let image_stats = new Image();
-      image_stats.src = "data:image/png;base64, " + Base64.encode(image);
-      image_stats.onload = function () {
-        console.log(image_stats.width, image_stats.height)
-        let promises = [];
-        // Start all promises
-        for (let j = 0; j <= image_stats.height - settings.y; j += settings.y)
-          for (let i = 0; i <= image_stats.width - settings.x; i += settings.x) {
-            promises.push(new BrowserImageManipulation()
-              .loadBlob(blob)
-              .crop(settings.x, settings.y, 0.0001 + i, 0.0001 + j)
-              .saveAsImage());
-          }
-        // Wait for all promises to finish
-        Promise.all(promises).then(function (base64) {
-          setResult(base64);
-        }).catch(function (e) { alert(e.toString()) })
-      }
+    if (image instanceof ArrayBuffer) {
+      arr.push(<Cropper
+        image={image}
+        settings={settings}
+        setResult={setResult}
+      />)
     }
   }
   return (
@@ -62,4 +44,52 @@ function App() {
   );
 }
 
+function Cropper(props: {
+  image: ArrayBuffer;
+  setResult: React.Dispatch<React.SetStateAction<string[]>>;
+  settings: {
+    x: number;
+    y: number;
+    number: number;
+  };
+}) {
+  useEffect(() => {
+    // Convert image to blob
+    let byteArray = new Uint8Array(props.image);
+    let blob = new Blob([byteArray], { type: 'image/png' });
+
+    let image_stats = new Image();
+    image_stats.src = "data:image/png;base64, " + Base64.encode(props.image);
+
+    image_stats.onload = function () {
+      crop(blob, image_stats, props.setResult, props.settings);
+      console.log("started cropping");
+    }
+  })
+  return <b></b>
+}
+
+async function crop(
+  blob: Blob,
+  image_stats: HTMLImageElement,
+  setResult: React.Dispatch<React.SetStateAction<string[]>>,
+  settings: {
+    x: number;
+    y: number;
+    number: number;
+  }) {
+  // Start all promises
+  let nr = 0;
+  for (let j = 0; j <= image_stats.height - settings.y; j += settings.y)
+    for (let i = 0; i <= image_stats.width - settings.x; i += settings.x) {
+      nr++;
+      if (nr > settings.number)
+        break;
+      new BrowserImageManipulation()
+        .loadBlob(blob)
+        .crop(settings.x, settings.y, 0.0001 + i, 0.0001 + j).saveAsImage().then(function (base64) {
+          setResult((prevState) => [...prevState, base64]);
+        }).catch(function (e) { alert(e.toString()) });
+    }
+}
 export default App;
