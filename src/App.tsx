@@ -10,10 +10,10 @@ function App() {
   const [result, setResult] = React.useState<string[]>([]);
   const [generating, setGenerating] = React.useState(false);
   const [settings, setSettings] = React.useState({
-    x: 413,
-    y: 753,
+    x: 100,
+    y: 100,
     // Please don't ever go over 100, too much ram needed
-    number: 100,
+    number: 1000,
   })
 
   let cropper = null;

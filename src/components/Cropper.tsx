@@ -48,16 +48,15 @@ async function crop(
     // Start all promises
     let nr = 0;
     setGenerating(true);
+    let loaded_image = new BrowserImageManipulation().loadBlob(blob);
     for (let j = 0; j <= image_stats.height - settings.y; j += settings.y)
         for (let i = 0; i <= image_stats.width - settings.x; i += settings.x) {
             nr++;
             if (nr > settings.number)
                 break;
-            await new BrowserImageManipulation()
-                .loadBlob(blob)
-                .crop(settings.x, settings.y, 0.0001 + i, 0.0001 + j).saveAsImage().then(function (base64) {
-                    setResult((prevState) => [...prevState, base64]);
-                }).catch(function (e) { alert(e.toString()) });
+            await loaded_image.crop(settings.x, settings.y, 0.0001 + i, 0.0001 + j).saveAsImage().then(function (base64) {
+                setResult((prevState) => [...prevState, base64]);
+            }).catch(function (e) { alert(e.toString()) });
         }
     setGenerating(false);
 }
