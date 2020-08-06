@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
       width: '100%',
       padding: theme.spacing(2),
+      paddingBottom: '0px !important',
       flexWrap: 'wrap'
     },
     settings: {
@@ -25,7 +26,10 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingBottom: '8px !important'
     },
     grid: {
-      padding: 10
+      padding: theme.spacing(1)
+    },
+    resultbox: {
+      padding: '16px !important'
     }
   }),
 );
@@ -66,7 +70,7 @@ function App() {
     <Grid container spacing={2} className={classes.root} justify="center">
       <Grid item xs={4} className={classes.grid}>
         <Card className={classes.settings}>
-          <CardContent>
+          <CardContent className={classes.nopadding}>
             <Typography gutterBottom align="center" variant="h5">
               Settings
           </Typography>
@@ -77,9 +81,21 @@ function App() {
               generating={generating}
             />
             {cropper}
-            <Saver
-              images={result}
-            />
+            <Grid container className={classes.root} justify="center">
+              <Grid item xs={4}>
+                <Saver
+                  images={result}
+                  generating={generating}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <Saver
+                  images={result}
+                  generating={generating}
+                />
+              </Grid>
+            </Grid>
+
           </CardContent>
         </Card>
       </Grid>
@@ -94,8 +110,11 @@ function App() {
           </CardContent>
         </Card>
       </Grid>
+      <Grid item xs={12} className={classes.resultbox}>
+        <ResultBox settings={settings} images={result} />
+      </Grid>
     </Grid>
-    <ResultBox settings={settings} images={result} />
+
   </div>
 }
 

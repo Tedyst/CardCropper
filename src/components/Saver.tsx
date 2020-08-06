@@ -1,9 +1,11 @@
 import React, { MouseEvent } from 'react'
 import JSZip from 'jszip'
 import FileSaver from 'file-saver'
+import { Button } from '@material-ui/core';
 
 export default function Saver(props: {
-    images: string[]
+    images: string[],
+    generating: boolean
 }) {
     let zip = new JSZip();
 
@@ -20,7 +22,13 @@ export default function Saver(props: {
             });
     }
 
-    if (props.images.length !== 0)
-        return <a href="/#" onClick={handleClick}>Download zip</a>;
-    return <b></b>;
+    return <Button
+        variant="contained"
+        color="secondary"
+        onClick={handleClick}
+        disabled={props.generating || props.images.length === 0}
+
+    >
+        Download zip
+        </Button>
 }

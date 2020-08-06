@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme: Theme) =>
         root: {
             height: '100%',
             minHeight: '100%',
+            maxHeight: '100%',
             padding: theme.spacing(3)
         }
     }),
