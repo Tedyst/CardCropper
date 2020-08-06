@@ -1,6 +1,17 @@
 import React, { useCallback } from 'react'
 import BrowserImageManipulation from 'browser-image-manipulation'
 import { DropzoneArea } from 'material-ui-dropzone'
+import { makeStyles, createStyles, Theme } from '@material-ui/core';
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            height: '100%',
+            minHeight: '100%',
+            padding: theme.spacing(3)
+        }
+    }),
+);
 
 
 function MyDropzone(props: {
@@ -11,6 +22,7 @@ function MyDropzone(props: {
         y: number;
     }>>
 }) {
+    const classes = useStyles();
     const onDrop = useCallback((acceptedFiles) => {
         acceptedFiles.forEach((file: File) => {
             const reader = new FileReader()
@@ -52,6 +64,7 @@ function MyDropzone(props: {
         showPreviews={false}
         showPreviewsInDropzone={false}
         maxFileSize={10000000000}
+        dropzoneClass={classes.root}
     />
 }
 

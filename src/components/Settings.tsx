@@ -1,5 +1,4 @@
 import React from 'react'
-import { Typography } from '@material-ui/core';
 import InputSlider from './InputSlider';
 
 export default function Settings(props: {
@@ -17,9 +16,6 @@ export default function Settings(props: {
     generating: boolean
 }) {
     return < div >
-        <Typography gutterBottom>
-            Settings
-        </Typography>
         <InputSlider
             settings={props.settings}
             setSettings={props.setSettings}
