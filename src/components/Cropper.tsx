@@ -45,8 +45,8 @@ async function crop(
     // Start all promises
     let nr = 0;
     setGenerating(true);
-    for (let j = 0; j <= image_stats.y - settings.y; j += settings.y)
-        for (let i = 0; i <= image_stats.x - settings.x; i += settings.x) {
+    for (let j = 0; j <= image_stats.y - settings.y + 1; j += settings.y)
+        for (let i = 0; i <= image_stats.x - settings.x + 1; i += settings.x) {
             nr++;
             if (nr > settings.number)
                 break;
