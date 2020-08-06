@@ -5,12 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
     "@types/file-saver": "^2.0.1",
-    "base64-arraybuffer": "^0.2.0",
-    "bottleneck": "^2.19.5",
     "browser-image-manipulation": "^0.3.3",
     "file-saver": "^2.0.2",
     "jszip": "^3.5.0",
@@ -18,7 +13,6 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-dropzone": "^11.0.2",
-    "react-imgpro": "^1.4.1",
     "react-scripts": "3.4.1",
     "typescript": "^3.9.7"
   },
