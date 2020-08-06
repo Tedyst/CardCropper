@@ -15,7 +15,7 @@ export default function Settings(props: {
     setResult: React.Dispatch<React.SetStateAction<string[]>>,
     generating: boolean
 }) {
-    return < div >
+    return <div>
         <InputSlider
             settings={props.settings}
             setSettings={props.setSettings}
@@ -37,5 +37,5 @@ export default function Settings(props: {
             changer="number"
             disabled={props.generating}
         />
-    </div >
+    </div>
 }
