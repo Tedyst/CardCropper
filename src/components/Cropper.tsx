@@ -42,7 +42,6 @@ async function crop(
     },
     setGenerating: React.Dispatch<React.SetStateAction<boolean>>
 ) {
-    // Start all promises
     let nr = 0;
     setGenerating(true);
     for (let j = 0; j <= image_stats.y - settings.y + 1; j += settings.y)
