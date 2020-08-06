@@ -17,8 +17,8 @@ export default function Settings(props: {
     function handleClick(e: MouseEvent) {
         props.setSettings({
             number: 100,
-            x: 100,
-            y: 100
+            x: props.settings.x + 10,
+            y: props.settings.y + 10
         })
         props.setResult([]);
     }

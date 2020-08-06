@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
-import { useDropzone } from 'react-dropzone'
 import BrowserImageManipulation from 'browser-image-manipulation'
+import { DropzoneArea } from 'material-ui-dropzone'
 
 
 function MyDropzone(props: {
@@ -44,14 +44,15 @@ function MyDropzone(props: {
         })
 
     }, [props])
-    const { getRootProps, getInputProps } = useDropzone({ onDrop })
 
-    return (
-        <div {...getRootProps()}>
-            <input {...getInputProps()} />
-            <p>Drop aici</p>
-        </div>
-    )
+    return <DropzoneArea
+        acceptedFiles={['image/*']}
+        dropzoneText={"Drag and drop an image here or click"}
+        onDrop={onDrop}
+        showPreviews={false}
+        showPreviewsInDropzone={false}
+        maxFileSize={10000000000}
+    />
 }
 
 export default MyDropzone;
