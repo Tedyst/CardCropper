@@ -21,7 +21,7 @@ function App() {
   })
 
   let cropper = null;
-  if (result.length === 0 && image instanceof BrowserImageManipulation && !generating) {
+  if (result.length === 0 && image instanceof BrowserImageManipulation && !generating && image_stats.x !== 0) {
     cropper = <Cropper
       image={image}
       image_stats={image_stats}
