@@ -46,23 +46,29 @@ export default function InputSlider(props: {
             return
         }
         if (props.changer === "x") {
-            props.setSettings({
+            let newSettings = {
                 x: newValue,
                 y: props.settings.y,
                 number: props.settings.number
-            })
+            }
+            props.setSettings(newSettings)
+            localStorage.setItem("settings", JSON.stringify(newSettings))
         } else if (props.changer === "y") {
-            props.setSettings({
+            let newSettings = {
                 x: props.settings.x,
                 y: newValue,
                 number: props.settings.number
-            })
+            }
+            props.setSettings(newSettings)
+            localStorage.setItem("settings", JSON.stringify(newSettings))
         } else if (props.changer === "number") {
-            props.setSettings({
+            let newSettings = {
                 x: props.settings.x,
                 y: props.settings.y,
                 number: newValue
-            })
+            }
+            props.setSettings(newSettings)
+            localStorage.setItem("settings", JSON.stringify(newSettings))
         }
         props.setResult([]);
     }
