@@ -16,7 +16,7 @@ export default function Settings(props: {
     setResult: React.Dispatch<React.SetStateAction<string[]>>,
     generating: boolean
 }) {
-    return <div>
+    return < div >
         <Typography gutterBottom>
             Settings
         </Typography>
@@ -41,5 +41,5 @@ export default function Settings(props: {
             changer="number"
             disabled={props.generating}
         />
-    </div>
+    </div >
 }
