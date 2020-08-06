@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardContent, Grid, CardMedia } from '@material-ui/core';
+import { Card, Grid, CardMedia } from '@material-ui/core';
 
 export default function ResultBox(props: {
     images: string[],
