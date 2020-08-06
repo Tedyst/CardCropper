@@ -42,6 +42,9 @@ export default function InputSlider(props: {
         value = props.settings.number;
 
     function setValue(newValue: number) {
+        if (newValue < 1) {
+            return
+        }
         if (props.changer === "x") {
             props.setSettings({
                 x: newValue,
@@ -70,7 +73,7 @@ export default function InputSlider(props: {
     };
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(event.target.value === '' ? 0 : Number(event.target.value));
+        setValue(event.target.value === '' ? 2 : Number(event.target.value));
     };
 
     const handleBlur = () => {
