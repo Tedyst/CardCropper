@@ -1,12 +1,21 @@
 import React, { MouseEvent } from 'react'
 import JSZip from 'jszip'
 import FileSaver from 'file-saver'
-import { Button } from '@material-ui/core';
+import { Button, makeStyles, Theme, createStyles } from '@material-ui/core';
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            justifyContent: 'center'
+        },
+    }),
+);
 
 export default function Saver(props: {
     images: string[],
     generating: boolean
 }) {
+    const classes = useStyles();
     let zip = new JSZip();
 
     function handleClick(e: MouseEvent) {
@@ -27,7 +36,7 @@ export default function Saver(props: {
         color="secondary"
         onClick={handleClick}
         disabled={props.generating || props.images.length === 0}
-
+        className={classes.root}
     >
         Download zip
         </Button>

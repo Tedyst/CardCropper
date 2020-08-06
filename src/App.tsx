@@ -6,6 +6,7 @@ import ResultBox from './components/ResultBox'
 import Settings from './components/Settings'
 import BrowserImageManipulation from 'browser-image-manipulation'
 import { Grid, makeStyles, createStyles, Card, CardContent, Theme, Typography } from '@material-ui/core'
+import Reload from './components/Reload'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -89,8 +90,8 @@ function App() {
                 />
               </Grid>
               <Grid item xs={4}>
-                <Saver
-                  images={result}
+                <Reload
+                  setResult={setResult}
                   generating={generating}
                 />
               </Grid>
