@@ -17,7 +17,7 @@ function App() {
   const [settings, setSettings] = React.useState({
     x: 100,
     y: 100,
-    number: 1000,
+    number: 70,
   })
 
   let cropper = null;
@@ -31,7 +31,6 @@ function App() {
       generating={generating}
     />
   }
-
   return (
     <div>
       <Settings
@@ -40,6 +39,7 @@ function App() {
         setResult={setResult}
         generating={generating}
       />
+      <br /><br /><br /><br />
       <DropZone
         setImage={setImage}
         setResult={setResult}

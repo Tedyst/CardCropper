@@ -1,4 +1,6 @@
-import React, { MouseEvent } from 'react'
+import React from 'react'
+import { Typography } from '@material-ui/core';
+import InputSlider from './InputSlider';
 
 export default function Settings(props: {
     settings: {
@@ -14,15 +16,30 @@ export default function Settings(props: {
     setResult: React.Dispatch<React.SetStateAction<string[]>>,
     generating: boolean
 }) {
-    function handleClick(e: MouseEvent) {
-        props.setSettings({
-            number: 100,
-            x: props.settings.x + 10,
-            y: props.settings.y + 10
-        })
-        props.setResult([]);
-    }
-    if (props.generating)
-        return <b>cannot change settings</b>
-    return <a href="/#" onClick={handleClick}>VERY BAD Settings</a>;
+    return <div>
+        <Typography gutterBottom>
+            Settings
+        </Typography>
+        <InputSlider
+            settings={props.settings}
+            setSettings={props.setSettings}
+            setResult={props.setResult}
+            changer="x"
+            disabled={props.generating}
+        />
+        <InputSlider
+            settings={props.settings}
+            setSettings={props.setSettings}
+            setResult={props.setResult}
+            changer="y"
+            disabled={props.generating}
+        />
+        <InputSlider
+            settings={props.settings}
+            setSettings={props.setSettings}
+            setResult={props.setResult}
+            changer="number"
+            disabled={props.generating}
+        />
+    </div>
 }
