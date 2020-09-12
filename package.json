@@ -9,11 +9,11 @@
     "browser-image-manipulation": "^0.3.3",
     "file-saver": "^2.0.2",
     "jszip": "^3.5.0",
-    "material-ui-dropzone": "^3.3.1",
+    "material-ui-dropzone": "^3.4.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-dropzone": "^11.0.2",
-    "react-scripts": "3.4.1",
+    "react-dropzone": "^11.1.0",
+    "react-scripts": "^3.4.3",
     "typescript": "^3.9.7"
   },
   "scripts": {
